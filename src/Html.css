@@ -1,6 +1,14 @@
 .htmlMain {
   display: flex;
   position: relative;
+  background-image: linear-gradient(
+    to right,
+    #eea2a2 0%,
+    #bbc1bf 19%,
+    #57c6e1 42%,
+    #b49fda 79%,
+    #7ac5d8 100%
+  );
 }
 
 .mainMenu {
@@ -9,10 +17,113 @@
   box-shadow: 0 0 5px black;
   overflow: hidden;
   transition: all ease-in-out 0.25s;
-  margin-right: 50px;
+  background-color: white;
+}
+
+.logo {
+  width: 100%;
 }
 
 .mainCon {
-  flex: 1;
+  margin-left: 10px;
   background-color: white;
+  border-radius: 25px;
+  flex: 1;
+  box-shadow: 0 0 5px black;
+}
+
+.mainHeader {
+  position: relative;
+  background-color: orange;
+  border-radius: 25px;
+}
+
+.progressCon {
+  flex: 1;
+}
+
+.progressBar {
+  flex: 1;
+  padding: 5px;
+  border-radius: 25px;
+  background-color: white;
+}
+
+.progressView {
+  width: 50%;
+  background-color: blueviolet;
+  border-radius: 25px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.userAvatar {
+  margin-left: 10px;
+  position: relative;
+  cursor: pointer;
+  z-index: 1;
+  transition: all ease 0.25s;
+}
+
+.userAvatar:hover {
+  box-shadow: 0 0 10px black;
+}
+
+.userOpts {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: blueviolet;
+  border-radius: 10px;
+  list-style: none;
+  padding: unset;
+  transform-origin: 0 -10%;
+  transition: all ease 0.25s;
+  box-shadow: 0 0 10px black;
+}
+
+.userOpts::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(-80%, -50%) rotate(45deg);
+  width: 20px;
+  height: 20px;
+  background-color: blueviolet;
+  z-index: -1;
+}
+
+.userOpts > li {
+  cursor: pointer;
+  color: white;
+  padding: 10px 20px;
+  border-bottom: 1px solid white;
+  display: flex;
+  align-items: center;
+}
+
+.userOpts > li:hover {
+  background-color: white;
+  color: black;
+}
+
+.userOpts > li:first-child {
+  border-radius: 10px 10px 0 0;
+}
+
+.userOpts > li:last-child {
+  border: unset;
+  border-radius: 0 0 10px 10px;
+}
+
+.userOpts > li:last-child:hover {
+  background-color: white;
+  color: red;
+}
+
+.userOpts > li > span {
+  margin-left: 10px;
 }
