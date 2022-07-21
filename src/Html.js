@@ -1,4 +1,4 @@
-import { Avatar, Button } from "@mui/material";
+import { Avatar, Button, CircularProgress, Switch } from "@mui/material";
 import React, { useRef, useState } from "react";
 import "./Html.css";
 
@@ -15,24 +15,52 @@ import HomeIcon from "@mui/icons-material/Home";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
 import MenuIcon from "@mui/icons-material/Menu";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+
 import { Offcanvas } from "react-bootstrap";
 
 function Html() {
   const [showMenu, setMenu] = useState(false);
   const [showMiniMenu, setMiniMenu] = useState(false);
+  const [showOutput, setOutput] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const lineConRef = useRef();
+  const inputRef = useRef();
+  const outputRef = useRef();
 
   const addLine = (e) => {
     let numberOfLines = e.target.value.split("\n").length;
-    console.log(numberOfLines);
 
     lineConRef.current.innerHTML = Array(numberOfLines)
       .fill("<span></span>")
       .join("");
   };
 
+  const runCode = (e) => {
+    setLoading(true);
+    setTimeout(() => {
+      let val = inputRef.current.value;
+      if (!val.length > 0) {
+        alert("Please Enter Code");
+        setLoading(false);
+        return;
+      }
+
+      let iframe = outputRef.current;
+
+      var iframedoc = iframe.document;
+      if (iframe.contentDocument) iframedoc = iframe.contentDocument;
+      else if (iframe.contentWindow) iframedoc = iframe.contentWindow.document;
+      iframedoc.open();
+      iframedoc.writeln(val);
+      iframedoc.close();
+      setLoading(false);
+    }, 1000);
+  };
+
   return (
-    <div className="htmlMain container-fluid vh-100 p-2">
+    <div className="htmlMain container-fluid  p-2">
       <div
         className="mainMenu p-2 d-none d-md-block"
 
@@ -117,9 +145,15 @@ function Html() {
           </ul>
         </div>
 
-        <div className="mainBody p-2">
-          <div className="mainBodyCon p-5 row g-0">
-            <div className="col-12 col-md-4 bodyContent p-2">
+        <div className="mainBody p-md-2">
+          <div className="mainBodyCon">
+            <div
+              className="bodyContent p-md-2"
+              style={{
+                width: showOutput ? "0" : "calc(40% - 10px)",
+                opacity: showOutput ? 0 : 1,
+              }}
+            >
               <h1 className="bodyTitle">Body</h1>
               <div className="bodyImage d-flex align-items-center justify-content-center my-5">
                 <img src={logoBig} alt="Figure" />
@@ -213,13 +247,46 @@ function Html() {
                 </li>
               </ul>
             </div>
-            <div className="col-12 col-md codeCon">
+            <div
+              className="codeCon"
+              style={{
+                width: showOutput ? "calc(50% - 10px)" : "calc(60% - 10px)",
+              }}
+            >
+              <div className="commands">
+                <Switch onChange={(e) => setOutput(e.target.checked)} />
+                {showOutput ? (
+                  <Button>
+                    {loading ? (
+                      <CircularProgress
+                        hidden={!loading}
+                        style={{
+                          width: "20px",
+                          height: "20px",
+                        }}
+                      />
+                    ) : (
+                      <PlayArrowIcon onClick={runCode} />
+                    )}
+                  </Button>
+                ) : (
+                  <></>
+                )}
+              </div>
               <div className="editor">
                 <div className="line-numbers" ref={lineConRef}>
                   <span></span>
                 </div>
-                <textarea onKeyUp={addLine}></textarea>
+                <textarea onKeyUp={addLine} ref={inputRef}></textarea>
               </div>
+            </div>
+            <div
+              className="resCon"
+              style={{
+                width: showOutput ? "calc(50% - 10px)" : "0",
+              }}
+            >
+              <iframe ref={outputRef}></iframe>
             </div>
           </div>
         </div>
