@@ -30,11 +30,18 @@ function Html() {
   const outputRef = useRef();
 
   const addLine = (e) => {
-    let numberOfLines = e.target.value.split("\n").length;
+    let elem = e.target;
+
+    // let scrollHeight = elem.scrollHeight;
+    // elem.style.height = `${scrollHeight}px`;
+
+    let numberOfLines = elem.value.split("\n").length;
 
     lineConRef.current.innerHTML = Array(numberOfLines)
       .fill("<span></span>")
       .join("");
+
+    elem.style.height = `${lineConRef.current.clientHeight}px`;
   };
 
   const runCode = (e) => {
@@ -76,8 +83,151 @@ function Html() {
             <li>
               <Offcanvas show={showMenu} onHide={() => setMenu(false)}>
                 <Offcanvas.Header closeButton>
-                  <Offcanvas.Title>HTML</Offcanvas.Title>
+                  <Offcanvas.Title>
+                    <h1>HTML</h1>
+                    <small>Hyper Text Markup Language</small>
+                  </Offcanvas.Title>
                 </Offcanvas.Header>
+                <Offcanvas.Body>
+                  <div className="menuCon">
+                    <h4>Introduction</h4>
+                    <ul>
+                      <li>
+                        <p>Heading</p>
+                      </li>
+                      <li>
+                        <p>Paragraph</p>
+                      </li>
+                      <li>
+                        <p>Font</p>
+                      </li>
+                      <li>
+                        <p>Color</p>
+                      </li>
+                      <li>
+                        <p>Select</p>
+                      </li>
+                      <li>
+                        <p>Transform</p>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="menuCon">
+                    <h4>Skeleton</h4>
+                    <ul>
+                      <li>
+                        <p>HTML STUFF</p>
+                      </li>
+                      <li>
+                        <p>Attributs</p>
+                      </li>
+                      <li>
+                        <p>Font</p>
+                      </li>
+                      <li>
+                        <p>Color</p>
+                      </li>
+                      <li>
+                        <p>Select</p>
+                      </li>
+                      <li>
+                        <p>Transform</p>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="menuCon">
+                    <h4>Containers</h4>
+                    <ul>
+                      <li>
+                        <p>Heading</p>
+                      </li>
+                      <li>
+                        <p>Paragraph</p>
+                      </li>
+                      <li>
+                        <p>Font</p>
+                      </li>
+                      <li>
+                        <p>Color</p>
+                      </li>
+                      <li>
+                        <p>Select</p>
+                      </li>
+                      <li>
+                        <p>Transform</p>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="menuCon">
+                    <h4>Typography</h4>
+                    <ul>
+                      <li>
+                        <p>Heading</p>
+                      </li>
+                      <li>
+                        <p>Paragraph</p>
+                      </li>
+                      <li>
+                        <p>Font</p>
+                      </li>
+                      <li>
+                        <p>Color</p>
+                      </li>
+                      <li>
+                        <p>Select</p>
+                      </li>
+                      <li>
+                        <p>Transform</p>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="menuCon">
+                    <h4>Media</h4>
+                    <ul>
+                      <li>
+                        <p>Heading</p>
+                      </li>
+                      <li>
+                        <p>Paragraph</p>
+                      </li>
+                      <li>
+                        <p>Font</p>
+                      </li>
+                      <li>
+                        <p>Color</p>
+                      </li>
+                      <li>
+                        <p>Select</p>
+                      </li>
+                      <li>
+                        <p>Transform</p>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="menuCon">
+                    <h4>Navigation</h4>
+                    <ul>
+                      <li>
+                        <p>Heading</p>
+                      </li>
+                      <li>
+                        <p>Paragraph</p>
+                      </li>
+                      <li>
+                        <p>Font</p>
+                      </li>
+                      <li>
+                        <p>Color</p>
+                      </li>
+                      <li>
+                        <p>Select</p>
+                      </li>
+                      <li>
+                        <p>Transform</p>
+                      </li>
+                    </ul>
+                  </div>
+                </Offcanvas.Body>
               </Offcanvas>
               <Button onClick={() => setMenu(!showMenu)}>
                 <MenuIcon />
@@ -148,13 +298,13 @@ function Html() {
         <div className="mainBody p-md-2">
           <div className="mainBodyCon">
             <div
-              className="bodyContent p-md-2"
+              className={showOutput ? "bodyContent" : "bodyContent p-2"}
               style={{
                 width: showOutput ? "0" : "calc(40% - 10px)",
                 opacity: showOutput ? 0 : 1,
               }}
             >
-              <h1 className="bodyTitle">Body</h1>
+              <h1 className="bodyTitle">Introduction</h1>
               <div className="bodyImage d-flex align-items-center justify-content-center my-5">
                 <img src={logoBig} alt="Figure" />
               </div>

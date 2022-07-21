@@ -1,8 +1,70 @@
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: black;
+  /* border-radius: 10px; */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rebeccapurple;
+  /* border-radius: 10px; */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rebeccapurple;
+}
+
 .htmlMain {
   display: flex;
   position: relative;
   background-image: url("./assets/asset_bg.jpg");
   height: 100vh;
+}
+
+.menuCon {
+  margin-top: 10px;
+}
+
+.menuCon > ul {
+  position: relative;
+}
+
+.menuCon > ul::before {
+  content: "";
+  position: absolute;
+  left: 1.75rem;
+  height: 100%;
+  width: 10px;
+  background-color: #506882;
+  border-radius: 10px;
+}
+
+.menuCon > ul > li {
+  position: relative;
+  cursor: pointer;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.menuCon > ul > li::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 10%;
+  height: 2px;
+  border-radius: 20px;
+  background-color: rebeccapurple;
+  transition: all ease-in-out 0.25s;
+}
+
+.menuCon > ul > li:hover::before {
+  width: 50%;
 }
 
 .mainMenu {
@@ -71,7 +133,7 @@
   box-shadow: 0 0 5px black;
   position: relative;
   border-radius: 25px;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(20px);
   z-index: 1;
 }
 
@@ -79,12 +141,12 @@
   flex: 1;
   padding: 5px;
   border-radius: 25px;
-  background-color: black;
+  background-color: white;
 }
 
 .progressView {
   width: 50%;
-  background-color: blueviolet;
+  background-color: black;
   border-radius: 25px;
   color: white;
   display: flex;
@@ -108,7 +170,7 @@
   position: absolute;
   right: 0;
   top: 0;
-  background-color: blueviolet;
+  background-color: rebeccapurple;
   border-radius: 10px;
   list-style: none;
   padding: unset;
@@ -125,7 +187,7 @@
   transform: translate(-80%, -50%) rotate(45deg);
   width: 20px;
   height: 20px;
-  background-color: blueviolet;
+  background-color: rebeccapurple;
   z-index: -1;
 }
 
@@ -178,23 +240,12 @@
   border-radius: 25px;
   padding: 20px;
   overflow: hidden;
+  display: flex;
 }
 
 .bodyContent {
-  display: inline-block;
-  width: 0%;
-  height: inherit;
   overflow-y: auto;
-  transition: all ease 0.25s;
-}
-
-.codeCon {
-  display: inline-block;
-  width: calc(50% - 10px);
-  margin-left: 10px;
-  height: inherit;
-  overflow-y: auto;
-  transition: all ease 0.25s;
+  transition: all ease-in-out 0.25s;
 }
 
 .bodyTitle {
@@ -207,38 +258,14 @@
   max-width: 100%;
 }
 
-/* width */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: black;
-  /* border-radius: 10px; */
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: rebeccapurple;
-  /* border-radius: 10px; */
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: rebeccapurple;
-}
-
 .codeCon {
   position: relative;
-}
-
-.codeCon .editor {
-  position: relative;
-  min-height: 100%;
-  border-left: 10px solid green;
+  width: calc(50% - 10px);
+  margin-left: 10px;
+  background-color: orange;
+  transition: all ease-in-out 0.25s;
   display: flex;
-  line-height: 21px;
+  flex-direction: column;
 }
 
 .codeCon .commands {
@@ -247,15 +274,23 @@
   position: sticky;
   top: 0;
   right: 0;
-  width: 100%;
+  left: 0;
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
   z-index: 1;
 }
 
-.MuiSwitch-track {
-  background-color: blueviolet !important;
+.codeCon .commands .MuiSwitch-track {
+  background-color: white !important;
+}
+
+.codeCon .editor {
+  flex: 1;
+  border-left: 10px solid green;
+  display: flex;
+  line-height: 21px;
+  overflow: auto;
 }
 
 .codeCon .editor .line-numbers {
@@ -263,6 +298,8 @@
   flex-direction: column;
   padding: 10px;
   background-color: black;
+  min-height: 100%;
+  height: fit-content;
 }
 
 .line-numbers span {
@@ -293,7 +330,7 @@
   border-radius: 0 25px 25px 0;
   display: inline-flex;
   margin-left: 10px;
-  transition: all ease 0.25s;
+  transition: all ease-in-out 0.25s;
   align-items: center;
   justify-content: center;
 }
@@ -310,7 +347,12 @@
   .mainBody {
     overflow: unset;
   }
+  .mainHeader {
+    position: sticky;
+    top: 5px;
+  }
   .mainBodyCon {
+    flex-direction: column;
     padding: 10px;
   }
   .bodyContent {
